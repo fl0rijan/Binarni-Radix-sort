@@ -57,5 +57,11 @@ int main() {
 
     //testExtractBits(A, 3);
 
+    BinaryRadixSort(A);
+    cout << "\nPo sortiranju:" << endl;
+    for (const unsigned char num: A) {
+        cout << static_cast<int>(num) << " ";
+    }
+
     return 0;
 }
