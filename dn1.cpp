@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <fstream>
 using namespace std;
 
 vector<int> ExtractBits(const vector<unsigned char> &A, int bit) {
@@ -48,20 +49,47 @@ void testExtractBits(const vector<unsigned char> &A, int bit) {
     cout << endl;
 }
 
-int main() {
-    vector<unsigned char> A = {200, 3, 255, 128, 50, 100, 1, 2}; //samo za example
+bool BranjeStevil(vector<unsigned char> &A, const char s[]) {
+    ifstream input(s);
+    int st;
 
-    for (const unsigned char num: A) {
-        cout << static_cast<int>(num) << " ";
+    if (!input.is_open()) {
+        return false;
     }
 
+    while (input >> st) {
+        A.push_back(st);
+    }
+
+    input.close();
+    return true;
+}
+
+void IzpisStevil(const unsigned char *polje, unsigned int velikost) {
+    ofstream output("out.txt");
+
+    for (int i = 0; i < velikost; ++i) {
+        output << static_cast<int>(polje[i]) << " ";
+    }
+}
+
+int main(int argc, const char *argv[]) {
+    vector<unsigned char> A;
+
+    if (!BranjeStevil(A, argv[1])) return 0;
+
+    /*for (const unsigned char num: A) {
+        cout << static_cast<int>(num) << " ";
+    }*/
     //testExtractBits(A, 3);
 
     BinaryRadixSort(A);
-    cout << "\nPo sortiranju:" << endl;
+    /*cout << "\nPo sortiranju:" << endl;
     for (const unsigned char num: A) {
         cout << static_cast<int>(num) << " ";
-    }
+    }*/
+
+    IzpisStevil(&A[0], A.size());
 
     return 0;
 }
