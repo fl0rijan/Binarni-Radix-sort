@@ -21,6 +21,16 @@ void CountingSortByBit(vector<unsigned char> &A, int bit) {
     vector<int> D = ExtractBits(A, bit);
 }
 
+void testExtractBits(const vector<unsigned char> &A, int bit) {
+    vector<int> D = ExtractBits(A, bit);
+
+    cout << "Polje D za bit " << bit << ": ";
+    for (int b: D) {
+        cout << b << " ";
+    }
+    cout << endl;
+}
+
 int main() {
     vector<unsigned char> A = {200, 3, 255, 128, 50, 100, 1, 2}; //samo za example
 
@@ -28,6 +38,7 @@ int main() {
         cout << static_cast<int>(num) << " ";
     }
 
+    testExtractBits(A, 3);
 
     return 0;
 }
