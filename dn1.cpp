@@ -65,6 +65,14 @@ bool BranjeStevil(vector<unsigned char> &A, const char s[]) {
     return true;
 }
 
+void IzpisStevil(const unsigned char *polje, unsigned int velikost) {
+    ofstream output("out.txt");
+
+    for (int i = 0; i < velikost; ++i) {
+        output << static_cast<int>(polje[i]) << " ";
+    }
+}
+
 int main(int argc, const char *argv[]) {
     vector<unsigned char> A;
 
@@ -79,6 +87,8 @@ int main(int argc, const char *argv[]) {
     for (const unsigned char num: A) {
         cout << static_cast<int>(num) << " ";
     }
+
+    IzpisStevil(&A[0], A.size());
 
     return 0;
 }
