@@ -11,14 +11,31 @@ vector<int> ExtractBits(const vector<unsigned char> &A, int bit) {
     return D;
 }
 
-void BinaryRadixSort(vector<unsigned char> &A) {
-    for (int bit = 0; bit < 8; ++bit) {
-        //TODO CountingSortByBit(A, bit);
+void CountingSortByBit(vector<unsigned char> &A, int bit) {
+    int size = A.size();
+    vector<unsigned char> B(size); //to bo izhodno polje
+
+    vector<int> C(2, 0);
+
+    vector<int> D = ExtractBits(A, bit);
+
+    for (int i = 0; i < size; ++i) {
+        C[D[i]]++;
     }
+
+    C[1] += C[0];
+
+    for (int i = size - 1; i >= 0; --i) {
+        B[--C[D[i]]] = A[i];
+    }
+
+    swap(A, B);
 }
 
-void CountingSortByBit(vector<unsigned char> &A, int bit) {
-    vector<int> D = ExtractBits(A, bit);
+void BinaryRadixSort(vector<unsigned char> &A) {
+    for (int bit = 0; bit < 8; ++bit) {
+        CountingSortByBit(A, bit);
+    }
 }
 
 void testExtractBits(const vector<unsigned char> &A, int bit) {
@@ -38,7 +55,7 @@ int main() {
         cout << static_cast<int>(num) << " ";
     }
 
-    testExtractBits(A, 3);
+    //testExtractBits(A, 3);
 
     return 0;
 }
