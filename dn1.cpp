@@ -78,16 +78,16 @@ int main(int argc, const char *argv[]) {
 
     if (!BranjeStevil(A, argv[1])) return 0;
 
-    /*for (const unsigned char num: A) {
-        cout << static_cast<int>(num) << " ";
-    }*/
-    //testExtractBits(A, 3);
-
-    BinaryRadixSort(A);
-    /*cout << "\nPo sortiranju:" << endl;
     for (const unsigned char num: A) {
         cout << static_cast<int>(num) << " ";
-    }*/
+    }
+    testExtractBits(A, 3);
+
+    BinaryRadixSort(A);
+    cout << "\nPo sortiranju:" << endl;
+    for (const unsigned char num: A) {
+        cout << static_cast<int>(num) << " ";
+    }
 
     IzpisStevil(&A[0], A.size());
 
